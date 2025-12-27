@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CASE #121225</title>
+    <link href="https://fonts.googleapis.com/css2?family=Pirata+One&family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Cormorant+Garamond:wght@400;500;600;700&family=Homemade+Apple&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+<div class="paper">
+    
+    <div class="head-wrapper">
+        <a href="../../projects.html" style="text-decoration: none; color: inherit;">
+            <div style="font-family: var(--font-display); font-weight: bold; margin-bottom: 10px; border-bottom: 1px dotted #333; display: inline-block;">
+                ← RETURN TO CATALOGUE
+            </div>
+        </a>
+        <header class="masthead" style="font-size: 4rem;">The Report</header>
+    </div>
+
+    <div class="report-container">
+        
+        <div class="report-header">
+            <div class="case-id">CASE #121225</div>
+            
+            <div style="position: absolute; top: 0; right: 0; border: 3px double var(--ink-red); color: var(--ink-red); font-weight: 900; padding: 5px 15px; transform: rotate(-10deg); font-family: var(--font-display); opacity: 0.8; mix-blend-mode: multiply;">
+                FABRICATED
+            </div>
+
+            <h1 class="hl1" style="border: none; font-size: 3rem; margin-top: 10px;">Automated Tool Dispenser</h1>
+            <div class="hl2">"Precision motion for intelligent storage."</div>
+        </div>
+
+         <a href="https://youtu.be/Y-XY0qJnPVI" class="frame-link">
+            <figure class="magic-frame">
+                <img src="../../images/projects/121225.png" class="media" alt="SolidWorks Assembly">
+                <figcaption>Fig 1. The Mechanical Assembly (CAD)</figcaption>
+            </figure>
+        </a>
+
+        <div class="report-grid">
+            
+            <aside class="specs-sidebar">
+                <div style="font-family: var(--font-masthead); font-size: 1.5rem; margin-bottom: 15px; text-align: center;">Technical Specs</div>
+                
+                <div class="spec-item">
+                    <span class="spec-label">Role</span>
+                    <span class="spec-value">Mechanical Lead</span>
+                </div>
+                <div class="spec-item">
+                    <span class="spec-label">Payload</span>
+                    <span class="spec-value">5.0kg Max</span>
+                </div>
+                <div class="spec-item">
+                    <span class="spec-label">Drive</span>
+                    <span class="spec-value">3-Axis Cartesian</span>
+                </div>
+                <div class="spec-item">
+                    <span class="spec-label">Material</span>
+                    <span class="spec-value">Al-2020 / PETG</span>
+                </div>
+                <div class="spec-item">
+                    <span class="spec-label">Safety</span>
+                    <span class="spec-value">Self-Locking Hoist</span>
+                </div>
+            </aside>
+
+            <article class="investigation-log">
+
+                <h3>The Brief</h3>
+                <p>
+                    <span class="drop-cap">T</span>he objective was to engineer the mechanical skeleton for a "Smart Tool Storage and Dispensing Machine." The system needed to automatically retrieve and return tool baskets without human oversight, requiring a rigid, 3-axis gantry system capable of handling a 5kg dynamic payload.
+                </p>
+                <p>
+                     Key constraints included preventing "back-driving" (dropping the load) during power loss, ensuring smooth horizontal translation across storage racks, and precise linear actuation for tray insertion.
+                </p>
+
+                <h3>The Arsenal</h3>
+                <p>The mechanical architecture utilizes a modular V-slot aluminium framework driven by a hybrid configuration of DC and Stepper motors.</p>
+                
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 20px; border: 1px dashed #999; padding: 15px; background: #fafafa;">
+                    
+                    <div>
+                        <strong style="font-family: var(--font-display); font-size: 1.1rem; color: var(--ink-red);">Worm Gear DC Motor</strong>
+                        <div style="font-size: 0.85rem; line-height: 1.4; color: #555;">The Hoist (Z-Axis). Selected for its self-locking properties, ensuring the platform holds its vertical position even when unpowered.</div>
+                    </div>
+
+                    <div>
+                        <strong style="font-family: var(--font-display); font-size: 1.1rem; color: var(--ink-red);">Planetary Gear Motor</strong>
+                        <div style="font-size: 0.85rem; line-height: 1.4; color: #555;">The Drive (X-Axis). A JGB37-555 motor providing high torque to move the 8kg vehicle mass across the horizontal rails.</div>
+                    </div>
+
+                    <div>
+                        <strong style="font-family: var(--font-display); font-size: 1.1rem; color: var(--ink-red);">NEMA 17 Stepper</strong>
+                        <div style="font-size: 0.85rem; line-height: 1.4; color: #555;">The Hand (Y-Axis). Drives a GT2 belt system for the push-pull mechanism, offering precise position control for tray engagement.</div>
+                    </div>
+
+                    <div>
+                        <strong style="font-family: var(--font-display); font-size: 1.1rem; color: var(--ink-red);">Electromagnet</strong>
+                        <div style="font-size: 0.85rem; line-height: 1.4; color: #555;">The Grip. A 12V end-effector capable of securing 3kg metal baskets during the retrieval cycle.</div>
+                    </div>
+
+                    <div>
+                        <strong style="font-family: var(--font-display); font-size: 1.1rem; color: var(--ink-red);">2020 V-Slot Profile</strong>
+                        <div style="font-size: 0.85rem; line-height: 1.4; color: #555;">The Skeleton. Provides a modular, rigid, and lightweight frame that supports gantry wheels and custom 3D-printed brackets.</div>
+                    </div>
+
+                </div>
+
+                <h3>The Execution</h3>
+                <p>
+                    <strong>Z-Axis Hoisting:</strong> Safety was paramount. I calculated the static hold requirement at 49.05N. A standard motor would fail under gravity, so I implemented a 5840-31ZY Worm Gear motor. The worm drive mechanism inherently locks the output shaft, acting as a mechanical brake.
+                </p>
+                
+                <p>
+                    <strong>X-Axis Drive:</strong> To move the 8kg gantry assembly, I engineered a friction-drive system using a Planetary Gear Motor. Calculations determined a required peak torque of 0.28 Nm to overcome rolling resistance and accelerate to 0.1 m/s within 0.8 seconds.
+                </p>
+
+                 <p>
+                    <strong>Y-Axis Actuator:</strong> For the delicate task of extracting trays, I designed a linear actuator using a NEMA 17 stepper and GT2 belts. This setup delivers 31 RPM with sufficient torque to overcome the 14.7N static friction of the loaded trays.
+                </p>
+                
+                <h3>The Roadmap</h3>
+                <p>While the current mechanical system is fully operational, the following upgrades have been identified to enhance robustness and scalability:</p>
+
+                <ul style="list-style-type: square; padding-left: 20px; line-height: 1.6; color: #444; margin-bottom: 30px;">
+                    <li style="margin-bottom: 10px;">
+                        <strong style="color: var(--ink-black);">Suspension Drive System:</strong> 
+                        Implementing a compliant suspension mount for the drive wheel to ensure consistent rail contact and reduce structural loading on the main joints.
+                    </li>
+                    <li style="margin-bottom: 10px;">
+                        <strong style="color: var(--ink-black);">Encoder Integration:</strong> 
+                        Replacing the multi-sensor photo-interrupter array with a rotary encoder system. This would reduce cabling complexity and allow for infinite vertical positioning resolution.
+                    </li>
+                    <li style="margin-bottom: 10px;">
+                        <strong style="color: var(--ink-black);">Passive Alignment Guides:</strong> 
+                        Adding physical "landing spots" or grooves on the rails to passively self-center the platform at each column, reducing the reliance on perfect motor accuracy.
+                    </li>
+                    <li style="margin-bottom: 10px;">
+                        <strong style="color: var(--ink-black);">Soft Robotics Gripper:</strong> 
+                        Exploring compliant soft-robotic end-effectors or suction mechanisms to replace the electromagnet, offering more versatile handling for non-ferrous tool baskets.
+                    </li>
+                </ul>
+
+                <h3>The Result</h3>
+                <p>
+                   The fabricated system successfully achieved coordinated XYZ motion. The Z-axis hoist eliminated "back-driving" risks, and the modular chassis allowed for precise sensor mounting. The mechanical subsystem provided a stable, rigid foundation for the electronic integration and automated control logic.
+                </p>
+
+                <div class="action-buttons">
+                    <a href="https://youtu.be/Y-XY0qJnPVI" target="_blank" class="btn-primary">View Project Demo ↗</a>
+                </div>
+
+            </article>
+
+        </div>
+
+    </div>
+
+    <footer class="footer-section">
+        <div class="copyright">End of Interview.
+            <a href="#" style="color: var(--ink-red); text-decoration: none; border-bottom: 1px solid var(--ink-red); font-size: 0.8rem; display: inline-block; margin-top: 10px;">
+                Return to Masthead ↑
+            </a>
+        </div>
+    </footer>
+
+</div>
+</body>
+</html>

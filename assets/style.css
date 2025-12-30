@@ -460,27 +460,6 @@ figcaption {
 .wire-window::-webkit-scrollbar-thumb { background: var(--ink-black); }
 .wire-window::-webkit-scrollbar-thumb:hover { background: var(--ink-red); }
 
-.wire-footer {
-    border-top: 2px solid var(--ink-black);
-    padding: 10px;
-    text-align: right;
-    background: #eee;
-}
-
-.wire-footer a {
-    font-family: var(--font-display);
-    font-weight: 700;
-    font-size: 0.9rem;
-    color: var(--ink-black);
-    text-decoration: none;
-    text-transform: uppercase;
-}
-
-.wire-footer a:hover {
-    color: var(--ink-red);
-    letter-spacing: 1px;
-}
-
 /* On Mobile */
 @media (max-width: 700px) {
     .wire-feed-section { width: 100%; margin: 40px 0; border-width: 2px; }

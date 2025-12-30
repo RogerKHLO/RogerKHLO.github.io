@@ -416,80 +416,73 @@ figcaption {
 }
 
 /* =========================================
-   COMMUNICATIONS / CONTACT SECTION
+   LIVE WIRE FEED (Front Page)
    ========================================= */
-.communication-section {
-    margin: 60px auto 40px auto;
-    max-width: 900px;
-    border-top: 1px solid #ccc;
-    padding-top: 40px;
+.wire-feed-section {
+    max-width: 800px;
+    margin: 60px auto;
+    border: 4px double var(--ink-black);
+    background: #fdfdfd;
+    box-shadow: 10px 10px 0 rgba(0,0,0,0.1);
 }
 
-.contact-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 30px;
-}
-
-.contact-card {
-    display: block;
-    text-decoration: none;
-    background: #fff;
-    border: 3px solid var(--ink-black); /* Matches your other heavy borders */
-    padding: 25px;
-    text-align: center;
-    transition: all 0.3s ease;
-    position: relative;
-    box-shadow: 4px 4px 0 rgba(0,0,0,0.05);
-}
-
-/* Hover Effect: "Stamps" the card down */
-.contact-card:hover {
-    transform: translateY(2px);
-    box-shadow: 1px 1px 0 rgba(0,0,0,0.1);
-    border-color: var(--ink-red);
-}
-
-.card-icon {
-    font-size: 2rem;
-    color: var(--ink-black);
-    margin-bottom: 15px;
-}
-
-.contact-card:hover .card-icon {
-    color: var(--ink-red);
-}
-
-.card-title {
-    font-family: var(--font-display);
-    font-weight: 900;
-    font-size: 1.4rem;
-    text-transform: uppercase;
-    color: var(--ink-black);
-    margin-bottom: 10px;
-}
-
-.card-desc {
-    font-family: var(--font-body);
-    font-size: 1.1rem;
-    color: #555;
-    margin-bottom: 20px;
-    font-style: italic;
-}
-
-.card-meta {
+.wire-header {
+    background: var(--ink-black);
+    color: #fff;
     font-family: 'Courier New', monospace;
-    font-size: 0.8rem;
     font-weight: bold;
+    padding: 10px 15px;
+    font-size: 0.9rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.blinking-dot {
     color: var(--ink-red);
-    border-top: 1px dotted #ccc;
-    padding-top: 10px;
+    margin-right: 10px;
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0; } 100% { opacity: 1; } }
+
+.wire-window {
+    height: 400px; /* Fixed height creates the "window" effect */
+    overflow-y: auto; /* Adds scrollbar for content */
+    padding: 20px;
+    background-image: 
+        linear-gradient(#eee 1px, transparent 1px);
+    background-size: 100% 30px; /* Notebook paper lines */
+}
+
+/* Custom Scrollbar for the Feed */
+.wire-window::-webkit-scrollbar { width: 8px; }
+.wire-window::-webkit-scrollbar-track { background: #f1f1f1; border-left: 1px solid #ccc; }
+.wire-window::-webkit-scrollbar-thumb { background: var(--ink-black); }
+.wire-window::-webkit-scrollbar-thumb:hover { background: var(--ink-red); }
+
+.wire-footer {
+    border-top: 2px solid var(--ink-black);
+    padding: 10px;
+    text-align: right;
+    background: #eee;
+}
+
+.wire-footer a {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 0.9rem;
+    color: var(--ink-black);
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+.wire-footer a:hover {
+    color: var(--ink-red);
     letter-spacing: 1px;
 }
 
-/* Mobile Layout */
+/* On Mobile */
 @media (max-width: 700px) {
-    .contact-grid {
-        grid-template-columns: 1fr;
-    }
+    .wire-feed-section { width: 100%; margin: 40px 0; border-width: 2px; }
+    .wire-window { height: 300px; }
 }

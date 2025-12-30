@@ -424,6 +424,11 @@ figcaption {
     border: 4px double var(--ink-black);
     background: #fdfdfd;
     box-shadow: 10px 10px 0 rgba(0,0,0,0.1);
+    
+    /* CRITICAL: Ensures the container shrinks to fit the window exactly */
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 0; 
 }
 
 .wire-header {
@@ -447,11 +452,13 @@ figcaption {
 
 .wire-window {
     height: 400px; /* Fixed height creates the "window" effect */
-    overflow-y: auto; /* Adds scrollbar for content */
+    overflow-y: auto; /* Adds scrollbar */
     padding: 20px;
-    background-image: 
-        linear-gradient(#eee 1px, transparent 1px);
+    background-image: linear-gradient(#eee 1px, transparent 1px);
     background-size: 100% 30px; /* Notebook paper lines */
+    /* Remove bottom radius/border since footer is gone */
+    border-bottom: none; 
+    padding-bottom: 10px; /* Adds breathing room inside the scroll area */
 }
 
 /* Custom Scrollbar for the Feed */

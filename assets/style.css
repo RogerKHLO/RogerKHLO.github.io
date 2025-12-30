@@ -185,6 +185,24 @@ figcaption {
 .social-icon:hover { fill: var(--ink-red); transform: scale(1.2) rotate(5deg); }
 .copyright { font-family: var(--font-hand); font-size: 0.9rem; color: #555; margin-top: 10px; }
 
+/* Footer Specific Link */
+.footer-nav-link {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--ink-black);
+    text-decoration: none;
+    border-bottom: 1px dotted var(--ink-black);
+    padding-bottom: 2px;
+    transition: all 0.3s ease;
+}
+
+.footer-nav-link:hover {
+    color: var(--ink-red);
+    border-bottom: 1px solid var(--ink-red);
+    letter-spacing: 1px; /* Subtle expansion effect */
+}
+
 /* =========================================
    SCROLLING COLLAGE STYLES
    ========================================= */
@@ -394,5 +412,84 @@ figcaption {
         flex-direction: column;
         align-items: center;
         gap: 5px;
+    }
+}
+
+/* =========================================
+   COMMUNICATIONS / CONTACT SECTION
+   ========================================= */
+.communication-section {
+    margin: 60px auto 40px auto;
+    max-width: 900px;
+    border-top: 1px solid #ccc;
+    padding-top: 40px;
+}
+
+.contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+}
+
+.contact-card {
+    display: block;
+    text-decoration: none;
+    background: #fff;
+    border: 3px solid var(--ink-black); /* Matches your other heavy borders */
+    padding: 25px;
+    text-align: center;
+    transition: all 0.3s ease;
+    position: relative;
+    box-shadow: 4px 4px 0 rgba(0,0,0,0.05);
+}
+
+/* Hover Effect: "Stamps" the card down */
+.contact-card:hover {
+    transform: translateY(2px);
+    box-shadow: 1px 1px 0 rgba(0,0,0,0.1);
+    border-color: var(--ink-red);
+}
+
+.card-icon {
+    font-size: 2rem;
+    color: var(--ink-black);
+    margin-bottom: 15px;
+}
+
+.contact-card:hover .card-icon {
+    color: var(--ink-red);
+}
+
+.card-title {
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-size: 1.4rem;
+    text-transform: uppercase;
+    color: var(--ink-black);
+    margin-bottom: 10px;
+}
+
+.card-desc {
+    font-family: var(--font-body);
+    font-size: 1.1rem;
+    color: #555;
+    margin-bottom: 20px;
+    font-style: italic;
+}
+
+.card-meta {
+    font-family: 'Courier New', monospace;
+    font-size: 0.8rem;
+    font-weight: bold;
+    color: var(--ink-red);
+    border-top: 1px dotted #ccc;
+    padding-top: 10px;
+    letter-spacing: 1px;
+}
+
+/* Mobile Layout */
+@media (max-width: 700px) {
+    .contact-grid {
+        grid-template-columns: 1fr;
     }
 }

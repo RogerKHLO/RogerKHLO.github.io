@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Focus Session</title>
+    <link href="https://fonts.googleapis.com/css2?family=Pirata+One&family=Playfair+Display:wght@400;700;900&family=Cormorant+Garamond:wght@400;600&family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="paper">
+    
+    <div class="head-wrapper">
+        <a href="../index.html" style="text-decoration: none; color: inherit;">
+            <div style="font-family: var(--font-display); font-weight: bold; margin-bottom: 10px; border-bottom: 1px dotted #333; display: inline-block;">← RETURN TO FRONT PAGE</div>
+        </a>
+        <header class="masthead" style="font-size: 3rem;">The Chronometer</header>
+        <div class="subhead">
+            <span>Model #311225</span>
+            <span>Focus Mechanism</span>
+            <span>Pat. Pending</span>
+        </div>
+    </div>
+
+    <div class="chronometer-machine">
+        
+        <div class="machine-headplate">
+            <div class="screw tl"><div class="screw-slot"></div></div>
+            <div class="screw tr"><div class="screw-slot"></div></div>
+            <span style="letter-spacing: 2px; font-weight: bold; font-size: 1.2rem;">MODEL #311225</span>
+        </div>
+
+        <div class="machine-body">
+
+            <div class="mode-selector">
+                <span class="mode-label">TASK PROTOCOL SELECTOR</span>
+                <select id="protocolSelect" class="protocol-select" onchange="updateProtocol()">
+                    <option value="pomodoro">STANDARD / STUDY (25/5)</option>
+                    <option value="deep" selected>DEEP WORK / CODING (50/10)</option>
+                    <option value="flow">FLOW / WRITING (52/17)</option>
+                    <option value="ultradian">ULTRADIAN (90/20)</option>
+                </select>
+            </div>
+
+            <div class="session-manifest">
+                <div class="manifest-tape"></div>
+                <div class="manifest-row">
+                    <span class="manifest-label">SEQUENCE LOG:</span>
+                    <span class="manifest-value" id="manifestBlocks">-- BLOCKS</span>
+                </div>
+                <div class="manifest-row">
+                    <span class="manifest-label">CURRENT STRATEGY:</span>
+                    <span class="manifest-value break-highlight" id="manifestStrategy">--</span>
+                </div>
+            </div>
+
+            <div class="clock-stage">
+                <div class="clock-glare"></div>
+                <svg class="clock-svg" viewBox="0 0 200 200">
+                    <g class="clock-face-ticks" id="clockTicks"></g>
+                    <line x1="100" y1="100" x2="100" y2="60" class="hand hand-hour" id="handHour" />
+                    <line x1="100" y1="100" x2="100" y2="28" class="hand hand-minute" id="handMin" />
+                    <line x1="100" y1="100" x2="100" y2="22" class="hand hand-second" id="handSec" />
+                    <circle cx="100" cy="100" r="5" class="center-nut"></circle>
+                </svg>
+            </div>
+
+            <div class="readout-panel">
+                <div class="control-group">
+                    <button class="btn-adj" id="btnMinus" onclick="adjustTotal(-15)">-</button>
+                    <input type="text" id="timeInput" class="time-input" value="120 min">
+                    <button class="btn-adj" id="btnPlus" onclick="adjustTotal(15)">+</button>
+                </div>
+                <div class="status-label" id="statusLabel">TOTAL AVAILABLE TIME</div>
+            </div>
+
+            <div class="action-row">
+                <button class="btn-main btn-start" id="startBtn">ENGAGE</button>
+                <button class="btn-main" id="resetBtn">RESET</button>
+                <button class="btn-main btn-skip" id="skipBtn" style="display:none;">SKIP</button>
+            </div>
+
+            <div class="quota-section">
+                <div class="quota-header">
+                    <span>Cumulative Log</span>
+                    <span id="dailyText">0 MIN</span>
+                </div>
+                <div class="bar-container">
+                    <div class="bar-fill" id="dailyBar"></div>
+                </div>
+            </div>
+
+        </div> </div>
+
+    <footer class="footer-section">
+        <div class="copyright">End of Records.</div>
+    </footer>
+
+</div>
+
+<script>
+    // --- CONFIG ---
+    const MAX_MINUTES = 1020; 
+    const DAILY_GOAL = 240; 
+    
+    // --- STRATEGIES ---
+    const PROTOCOLS = {
+        'pomodoro': { focus: 25, break: 5, label: "25/5 POMODORO" },
+        'deep':     { focus: 50, break: 10, label: "50/10 DEEP WORK" },
+        'flow':     { focus: 52, break: 17, label: "52/17 FLOW STATE" },
+        'ultradian':{ focus: 90, break: 20, label: "90/20 ULTRADIAN" }
+    };
+
+    // --- STATE ---
+    let totalSessionGoal = 120; 
+    let activeProtocol = 'deep'; 
+    let schedule = []; 
+    let currentStepIndex = 0;
+    
+    let currentBlockDuration = 0; 
+    let timeLeft = 0;             
+    let isRunning = false;
+    let timerInterval = null;
+    let totalMinutesLogged = 0;
+
+    // --- ELEMENTS ---
+    const protocolSelect = document.getElementById('protocolSelect');
+    const timeInput = document.getElementById('timeInput');
+    const startBtn = document.getElementById('startBtn');
+    const resetBtn = document.getElementById('resetBtn');
+    const skipBtn = document.getElementById('skipBtn');
+    const statusLabel = document.getElementById('statusLabel');
+    
+    const manifestBlocks = document.getElementById('manifestBlocks');
+    const manifestStrategy = document.getElementById('manifestStrategy');
+    
+    const handHour = document.getElementById('handHour');
+    const handMin = document.getElementById('handMin');
+    const handSec = document.getElementById('handSec');
+    const dailyBar = document.getElementById('dailyBar');
+    const dailyText = document.getElementById('dailyText');
+
+    // --- INIT ---
+    function init() {
+        drawClockTicks();
+        loadStats();
+        
+        updateInputDisplay(totalSessionGoal);
+        calculateSchedule();
+        setHands(0);
+
+        startBtn.addEventListener('click', toggleTimer);
+        resetBtn.addEventListener('click', resetSession);
+        skipBtn.addEventListener('click', skipBreak);
+        
+        timeInput.addEventListener('change', handleManualInput);
+        timeInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') timeInput.blur(); });
+        timeInput.addEventListener('focus', () => { if(!isRunning) timeInput.value = ""; });
+        timeInput.addEventListener('blur', () => { if(timeInput.value === "") updateInputDisplay(totalSessionGoal); });
+    }
+
+    function drawClockTicks() {
+        const group = document.getElementById('clockTicks');
+        const cx = 100, cy = 100, r = 90;
+        for (let i = 0; i < 60; i++) {
+            const angle = (i * 6) * (Math.PI / 180);
+            const isMajor = i % 5 === 0;
+            const len = isMajor ? 12 : 6;
+            const x1 = cx + (r - len) * Math.sin(angle);
+            const y1 = cy - (r - len) * Math.cos(angle);
+            const x2 = cx + r * Math.sin(angle);
+            const y2 = cy - r * Math.cos(angle);
+            const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+            line.setAttribute("x1", x1); line.setAttribute("y1", y1);
+            line.setAttribute("x2", x2); line.setAttribute("y2", y2);
+            if (isMajor) line.classList.add("major");
+            group.appendChild(line);
+        }
+    }
+
+    function setHands(elapsedSeconds) {
+        const secDeg = elapsedSeconds * 6; 
+        const minDeg = (elapsedSeconds / 60) * 6; 
+        const hourDeg = (elapsedSeconds / 3600) * 30;
+        handSec.style.transform = `rotate(${secDeg}deg)`;
+        handMin.style.transform = `rotate(${minDeg}deg)`;
+        handHour.style.transform = `rotate(${hourDeg}deg)`;
+    }
+
+    function formatMinutesToHrMin(m) {
+        if (m < 60) return `${m} min`;
+        const hr = Math.floor(m / 60);
+        const min = m % 60;
+        if (min === 0) return `${hr} hr`;
+        return `${hr} hr ${min} min`;
+    }
+
+    function updateInputDisplay(m) { timeInput.value = formatMinutesToHrMin(m); }
+    function formatTime(s) {
+        const m = Math.floor(s / 60);
+        const sec = s % 60;
+        return `${m}:${sec < 10 ? '0' : ''}${sec}`;
+    }
+
+    // --- PROTOCOL & SCHEDULE LOGIC ---
+    function updateProtocol() {
+        activeProtocol = protocolSelect.value;
+        calculateSchedule();
+    }
+
+    function calculateSchedule() {
+        schedule = [];
+        const proto = PROTOCOLS[activeProtocol];
+        
+        let remaining = totalSessionGoal;
+        
+        while (remaining > 0) {
+            if (remaining >= proto.focus) {
+                schedule.push({ type: 'focus', duration: proto.focus });
+                remaining -= proto.focus;
+                if (remaining >= 5) { 
+                     let brk = Math.min(proto.break, remaining);
+                     schedule.push({ type: 'break', duration: brk });
+                     remaining -= brk;
+                }
+            } else {
+                if (remaining > 0) {
+                    schedule.push({ type: 'focus', duration: remaining });
+                    remaining = 0;
+                }
+            }
+        }
+        
+        if (schedule.length > 0 && schedule[schedule.length-1].type === 'break') {
+             schedule.pop();
+        }
+
+        updateManifest();
+    }
+
+    function updateManifest() {
+        let focusCount = schedule.filter(s => s.type === 'focus').length;
+        let breakCount = schedule.filter(s => s.type === 'break').length;
+        const proto = PROTOCOLS[activeProtocol];
+
+        manifestBlocks.innerText = `${focusCount} FOCUS BLOCKS`;
+        
+        if (breakCount > 0) {
+            manifestStrategy.innerText = `${proto.label}`;
+            manifestStrategy.style.color = "#8a1c1c";
+        } else {
+            manifestStrategy.innerText = "SINGLE SESSION";
+            manifestStrategy.style.color = "#666";
+        }
+    }
+
+    // --- INPUT ---
+    function adjustTotal(amount) {
+        if (isRunning) return;
+        let val = totalSessionGoal + amount;
+        if (val < 15) val = 15;
+        if (val > MAX_MINUTES) val = MAX_MINUTES;
+        totalSessionGoal = val;
+        updateInputDisplay(val);
+        calculateSchedule();
+    }
+
+    function handleManualInput() {
+        let raw = parseInt(timeInput.value);
+        if (isNaN(raw)) { updateInputDisplay(totalSessionGoal); return; }
+        if (raw < 5) raw = 5;
+        if (raw > MAX_MINUTES) raw = MAX_MINUTES;
+        totalSessionGoal = raw;
+        updateInputDisplay(raw);
+        calculateSchedule();
+    }
+
+    // --- TIMER ---
+    function toggleTimer() { if (isRunning) pause(); else start(); }
+
+    function start() {
+        if (timeLeft === 0 && currentStepIndex === 0 && !isRunning) loadBlock(0);
+        isRunning = true;
+        startBtn.innerText = "HALT";
+        timeInput.disabled = true;
+        protocolSelect.disabled = true; 
+        document.getElementById('btnMinus').disabled = true;
+        document.getElementById('btnPlus').disabled = true;
+        updateStatusLabel();
+        timerInterval = setInterval(tick, 1000);
+    }
+
+    function pause() {
+        clearInterval(timerInterval);
+        isRunning = false;
+        startBtn.innerText = "RESUME";
+        statusLabel.innerText = "OPERATION PAUSED";
+        statusLabel.style.color = "#666";
+        document.title = "Paused | Focus";
+    }
+
+    function resetSession() {
+        clearInterval(timerInterval);
+        
+        const hands = document.querySelectorAll('.hand');
+        hands.forEach(h => h.style.transition = 'none');
+        setHands(0);
+        void handSec.offsetWidth;
+        hands.forEach(h => h.style.transition = '');
+
+        isRunning = false;
+        currentStepIndex = 0;
+        timeLeft = 0;
+        
+        updateInputDisplay(totalSessionGoal);
+        timeInput.disabled = false;
+        protocolSelect.disabled = false;
+        document.getElementById('btnMinus').disabled = false;
+        document.getElementById('btnPlus').disabled = false;
+        
+        startBtn.innerText = "ENGAGE";
+        skipBtn.style.display = "none";
+        statusLabel.innerText = "TOTAL AVAILABLE TIME";
+        statusLabel.style.color = "#8a1c1c";
+        
+        calculateSchedule(); 
+        timeInput.style.color = "#000000";
+        handSec.style.stroke = "#8a1c1c";
+        document.title = "Focus Session | The Chronometer";
+    }
+
+    function loadBlock(index) {
+        currentStepIndex = index;
+        let step = schedule[index];
+        currentBlockDuration = step.duration;
+        timeLeft = step.duration * 60;
+        
+        const hands = document.querySelectorAll('.hand');
+        hands.forEach(h => h.style.transition = 'none');
+        setHands(0);
+        void handSec.offsetWidth;
+        hands.forEach(h => h.style.transition = '');
+
+        updateStatusLabel();
+        
+        if (step.type === 'break') {
+            skipBtn.style.display = "inline-block";
+            // Dark Green for readability against white background
+            timeInput.style.color = "#006400"; 
+            handSec.style.stroke = "#006400";
+            statusLabel.style.color = "#006400";
+        } else {
+            skipBtn.style.display = "none";
+            // Black for focus
+            timeInput.style.color = "#000000"; 
+            handSec.style.stroke = "#8a1c1c";
+            statusLabel.style.color = "#8a1c1c";
+        }
+    }
+
+    function updateStatusLabel() {
+        let step = schedule[currentStepIndex];
+        let totalSteps = schedule.filter(s => s.type === step.type).length;
+        let currentTypeIndex = 0;
+        for(let i=0; i<=currentStepIndex; i++) {
+            if(schedule[i].type === step.type) currentTypeIndex++;
+        }
+
+        if (step.type === 'focus') {
+            statusLabel.innerText = `PHASE: CONCENTRATION (${currentTypeIndex}/${totalSteps})`;
+        } else {
+            statusLabel.innerText = `PHASE: RECOVERY (${currentTypeIndex}/${totalSteps})`;
+        }
+    }
+
+    function tick() {
+        if (timeLeft > 0) {
+            timeLeft--;
+            let elapsed = (currentBlockDuration * 60) - timeLeft;
+            setHands(elapsed);
+            timeInput.value = formatTime(timeLeft);
+            let type = schedule[currentStepIndex].type;
+            document.title = `(${formatTime(timeLeft)}) ` + (type === 'break' ? "Break" : "Focus");
+        } else {
+            completeBlock();
+        }
+    }
+
+    function completeBlock() {
+        const sound = new Audio('https://assets.mixkit.co/active_storage/sfx/2869/2869-preview.mp3');
+        sound.play().catch(e => {});
+        let step = schedule[currentStepIndex];
+        if (step.type === 'focus') {
+            totalMinutesLogged += step.duration;
+            localStorage.setItem('dailyFocusTime', totalMinutesLogged);
+            updateDailyVisuals();
+        }
+        if (currentStepIndex < schedule.length - 1) {
+            loadBlock(currentStepIndex + 1);
+        } else {
+            finishEntireSession();
+        }
+    }
+
+    function finishEntireSession() {
+        clearInterval(timerInterval);
+        isRunning = false;
+        statusLabel.innerText = "SESSION COMPLETE";
+        startBtn.innerText = "NEW TASK";
+        setHands(0); 
+        timeInput.value = "DONE";
+        currentStepIndex = 0; timeLeft = 0;
+    }
+
+    function skipBreak() { if (schedule[currentStepIndex].type === 'break') completeBlock(); }
+    function loadStats() {
+        const saved = localStorage.getItem('dailyFocusTime');
+        if (saved) totalMinutesLogged = parseInt(saved);
+        updateDailyVisuals();
+    }
+    function updateDailyVisuals() {
+        dailyText.innerText = totalMinutesLogged + " MIN";
+        const percent = Math.min(100, (totalMinutesLogged / DAILY_GOAL) * 100);
+        dailyBar.style.width = percent + "%";
+    }
+
+    init();
+</script>
+
+</body>
+</html>

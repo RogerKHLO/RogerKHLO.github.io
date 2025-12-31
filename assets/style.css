@@ -775,3 +775,38 @@ figcaption {
     background: repeating-linear-gradient(-45deg, #8a1c1c, #8a1c1c 8px, #a32424 8px, #a32424 16px);
     box-shadow: 0 0 10px rgba(138, 28, 28, 0.5);
 }
+
+/* =========================================
+   MOBILE RESPONSIVENESS FIXES
+   ========================================= */
+@media (max-width: 600px) {
+    .chronometer-machine {
+        /* Ensure it doesn't touch screen edges */
+        width: 92%; 
+        margin: 20px auto; 
+        padding: 30px 15px;
+        
+        /* FIX: Remove the 15px side shadow that creates unbalance */
+        /* Replaced with a simple bottom ledge for 3D effect without offset */
+        box-shadow: 0 6px 0 #111, inset 0 0 40px rgba(0,0,0,0.1);
+    }
+
+    /* Adjust the input text size so it doesn't break layout */
+    .time-input {
+        font-size: 1.8rem;
+        width: 100%;
+        max-width: 200px;
+    }
+
+    /* Stack buttons if screen is very narrow */
+    .action-row {
+        gap: 10px;
+        flex-wrap: wrap;
+    }
+    
+    .btn-main {
+        min-width: 100px;
+        padding: 10px 15px;
+        font-size: 0.8rem;
+    }
+}

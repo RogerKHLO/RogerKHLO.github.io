@@ -777,36 +777,55 @@ figcaption {
 }
 
 /* =========================================
-   MOBILE RESPONSIVENESS FIXES
+   MOBILE RESPONSIVENESS FIXES (Centered)
    ========================================= */
 @media (max-width: 600px) {
     .chronometer-machine {
-        /* Ensure it doesn't touch screen edges */
-        width: 92%; 
-        margin: 20px auto; 
-        padding: 30px 15px;
+        /* Force Center Alignment */
+        display: flex;
+        flex-direction: column;
+        align-items: center; 
         
-        /* FIX: Remove the 15px side shadow that creates unbalance */
-        /* Replaced with a simple bottom ledge for 3D effect without offset */
-        box-shadow: 0 6px 0 #111, inset 0 0 40px rgba(0,0,0,0.1);
+        /* Size & Spacing */
+        width: 90%; 
+        max-width: 400px;
+        margin: 20px auto !important; /* Force math centering */
+        padding: 40px 15px;
+        
+        /* Mobile Shadow: Symmetrical (Bottom only) */
+        box-shadow: 
+            0 8px 0 #111, 
+            inset 0 0 30px rgba(0,0,0,0.1);
+        
+        /* Reset positioning */
+        left: 0;
+        transform: none;
     }
 
-    /* Adjust the input text size so it doesn't break layout */
+    .clock-stage {
+        /* Remove auto margins, let Flexbox center it */
+        margin: 0 0 30px 0;
+        
+        /* Scale down slightly if screen is very narrow (iPhone SE etc) */
+        transform: scale(0.95); 
+    }
+
+    /* Adjust Input Size */
     .time-input {
         font-size: 1.8rem;
         width: 100%;
-        max-width: 200px;
     }
 
-    /* Stack buttons if screen is very narrow */
+    /* Button Layout */
     .action-row {
         gap: 10px;
         flex-wrap: wrap;
+        width: 100%;
+        justify-content: center;
     }
     
     .btn-main {
-        min-width: 100px;
-        padding: 10px 15px;
-        font-size: 0.8rem;
+        min-width: 100px; /* Prevent squishing */
+        flex: 1; /* Distribute space evenly */
     }
 }

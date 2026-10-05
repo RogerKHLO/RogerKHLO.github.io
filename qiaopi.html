@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>數位平安批 - 跨越汪洋的家書</title>
+    
+    <!-- 引入繁體宋體與日文行書字體 (Yuji Syuku) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;700;900&family=Yuji+Syuku&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/qiaopi.css">
+</head>
+<body data-splash>
+
+    <div class="qiaopi-paper">
+        
+        <!-- ================= 始終懸浮的 UI 層 ================= -->
+        <div class="scroll-edge right"></div>
+        <div class="scroll-edge left"></div>
+        
+        <!-- 返回英文版的固定按鈕 -->
+        <a href="index.html" data-lang-switch class="lang-badge-fixed" title="Return to English Edition">太誤事報版 ⟲</a>
+
+        <!-- ================= 畫卷滾動層 ================= -->
+        <div class="text-grid-container">
+            <div class="text-grid">
+                
+                <!-- 靜態附屬元素 -->
+                
+                <a href="info.html" class="portrait-link" title="點擊查閱生平檔志">
+                    <div class="portrait-wrapper">
+                        <img class="portrait-img" src="images/misc/ditherme.jpg" alt="羅康宏 肖像">
+                        <div class="stamp-verified">大字匯批</div>
+                        <div class="portrait-caption">圖 1. 後昆 <span class="brush-name">羅康宏</span></div>
+                    </div>
+                </a>
+
+                <div class="envelope-note"><span data-t="envelope"></span></div>
+
+                <div class="official-stamp">
+                    南洋匯批<br>局印信發
+                </div>
+
+                <div id="zh-body" style="display:contents"></div>
+            </div>
+        </div>
+
+    </div>
+
+<script src="assets/js/site.js"></script>
+</body>
+</html>

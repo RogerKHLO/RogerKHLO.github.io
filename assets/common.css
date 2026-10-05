@@ -1,0 +1,22 @@
+/* common.css — language toggle + welcome splash (loaded by site.js on every page) */
+.lang-toggle {
+    position: fixed; top: 12px; right: 12px; z-index: 9000; padding: 6px 12px;
+    font: 700 0.85rem serif; text-decoration: none; color: #1a1a1a;
+    background: #fff; border: 2px solid #1a1a1a; box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.25);
+}
+.lang-toggle:hover { color: #b32d2e; border-color: #b32d2e; }
+
+#splash { position: fixed; inset: 0; z-index: 10000; display: flex; align-items: center; justify-content: center; padding: 16px; background: rgba(20, 18, 15, 0.85); }
+#splash .card {
+    width: 100%; max-width: 420px; padding: 28px; text-align: center;
+    font-family: var(--font-body, 'Noto Serif TC', serif); background: #f4f1e8; border: 5px double #1a1a1a;
+}
+#splash h2 { margin: 0 0 4px; font-family: var(--font-masthead, 'Noto Serif TC', serif); font-size: 2rem; }
+#splash p { margin: 0 0 18px; font-style: italic; }
+#splash .splash-btn { display: block; margin: 10px 0; padding: 10px; font-weight: 700; text-decoration: none; color: #1a1a1a; border: 2px solid #1a1a1a; }
+#splash .splash-btn:hover { color: #f4f1e8; background: #1a1a1a; }
+
+/* Contact icons: same behaviour as the footer (.social-links / .social-icon in style.css) */
+#splash .social-links { display: flex; justify-content: center; gap: 30px; margin-top: 18px; padding-top: 14px; border-top: 1px dotted #1a1a1a; }
+#splash .social-icon { width: 28px; height: 28px; fill: var(--ink-black, #202020); cursor: pointer; transition: all 0.3s ease; }
+#splash .social-icon:hover { fill: var(--ink-red, #8a1c1c); transform: scale(1.2) rotate(5deg); }

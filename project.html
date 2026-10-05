@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Report</title>
+    <link href="https://fonts.googleapis.com/css2?family=Pirata+One&family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Cormorant+Garamond:wght@400;500;600;700&family=Homemade+Apple&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/marked@12.0.2/marked.min.js"></script>
+</head>
+<body>
+<div class="paper">
+    <div class="head-wrapper">
+        <a href="projects.html"><div id="back" class="back-link"></div></a>
+        <header class="masthead" style="font-size:4rem">The Report</header>
+    </div>
+    <div class="report-container" id="report"></div>
+    <footer class="footer-section" data-footer></footer>
+</div>
+<script src="assets/js/site.js"></script>
+<script>
+siteReady.then(async S => {
+  document.getElementById('back').textContent = S.T.back;
+  const id = new URLSearchParams(location.search).get('id');
+  const box = document.getElementById('report');
+  let p;
+  try { p = await S.loadProject(id); } catch { box.innerHTML = '<p style="text-align:center">Case file not found.</p>'; return; }
+  const m = p.meta;
+  document.title = m.id + ' – ' + m.title;
+  const pairs = s => (s || '').split(';').map(x => x.trim()).filter(Boolean);
+  const specs = pairs(m.specs).map(x => x.split('=')).map(([k, v]) =>
+    `<div class="spec-item"><span class="spec-label">${k}</span><span class="spec-value">${v}</span></div>`).join('');
+  const btns = pairs(m.links).map((x, i) => { const [l, u] = x.split('|');
+    return `<a href="${u}" target="_blank" class="${i ? 'btn-secondary' : 'btn-primary'}">${l}</a>`; }).join('');
+  const fig = `<figure class="magic-frame"><img src="${m.image}" class="media" alt="${m.title}"><figcaption>Fig 1. ${m.title}</figcaption></figure>`;
+  box.innerHTML = `
+    <div class="report-header"><div class="case-id">${m.id}</div>
+      <div class="report-stamp">${m.status || ''}</div>
+      <h1 class="hl1">${m.title}</h1>
+      <div class="hl2">"${m.tagline || ''}"</div></div>
+    ${m.video ? `<a href="${m.video}" target="_blank" class="frame-link">${fig}</a>` : fig}
+    <div class="report-grid">
+      <aside class="specs-sidebar"><div class="specs-title">${S.T.specs}</div>${specs}</aside>
+      <article class="investigation-log">${marked.parse(p.body)}<div class="action-buttons">${btns}</div></article>
+    </div>`;
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Daily Engineer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Pirata+One&family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Cormorant+Garamond:wght@400;500;600;700&family=Homemade+Apple&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/style.css">
+</head>
+<body data-splash>
+<div class="paper">
+    <div class="head-wrapper">
+        <div class="weather-box">
+            <div class="weather-title" data-t="statusTitle"></div>
+            <div class="weather-status" data-t="status"></div>
+            <div data-t="forecast"></div>
+        </div>
+        <header class="masthead" data-t="masthead">The Daily Engineer</header>
+        <div class="subhead"><span data-t="vol"></span><span id="date-display">Today</span><span data-t="price"></span></div>
+    </div>
+
+    <div class="content-grid">
+        <div class="column">
+            <div class="hl1" data-t="h1a"></div>
+            <div class="byline" data-t="byline"></div>
+            <p data-t="body1"></p>
+            <span class="citation" data-t="quote1"></span>
+            <p data-t="body2"></p>
+        </div>
+        <div class="column">
+            <div class="hl3" data-t="h3a"></div>
+            <div class="hl2" data-t="h2a"></div>
+            <a href="projects.html" class="frame-link"><figure class="magic-frame">
+                <img src="images/misc/hand.gif" class="media" alt=""><figcaption data-t="fig1"></figcaption></figure></a>
+            <p data-t="catalog"></p>
+        </div>
+        <div class="column">
+            <div class="hl1" data-t="h1b"></div>
+            <div class="hl2" data-t="h2b"></div>
+            <p data-t="body3"></p>
+            <a href="hobbies.html" class="frame-link"><figure class="magic-frame" style="transform:rotate(1deg)">
+                <img src="images/misc/logo.gif" class="media" alt=""><figcaption data-t="fig2"></figcaption></figure></a>
+            <span class="citation" style="font-size:1.4rem;border:none;font-family:var(--font-masthead)" data-t="quote2"></span>
+        </div>
+        <div class="column">
+            <div class="hl3" data-t="dirs"></div>
+            <div class="nav-links">
+                <a href="projects.html" data-t="navProjects"></a>
+                <a href="hobbies.html" data-t="navHobbies"></a>
+                <a href="#contact-footer" data-t="navContact"></a>
+                <a href="info.html" data-t="navAbout"></a>
+            </div>
+            <div style="margin-top:40px;border:4px double var(--ink-black);padding:15px;text-align:center;background:rgba(0,0,0,.03)">
+                <div style="font-family:var(--font-masthead);font-size:1.8rem" data-t="wanted"></div>
+                <p data-t="wantedBody"></p>
+                <div style="color:var(--ink-red);font-weight:900;border:2px solid var(--ink-red);display:inline-block;padding:2px 8px;transform:rotate(-2deg);margin-top:5px" data-t="reward"></div>
+                <p data-t="rewardBody"></p>
+            </div>
+        </div>
+    </div>
+
+    <div class="scrap-note-widget">
+        
+        <div class="note-tab">
+            <span class="note-label">Psst... Read this</span>
+            <span class="paper-clip">📎</span>
+        </div>
+
+        <div class="note-body">
+            <div class="lines"></div> <div class="giscus-wrapper">
+                <script src="https://giscus.app/client.js"
+                    data-repo="RogerKHLO/RogerKHLO.github.io"
+                    data-repo-id="[YOUR_REPO_ID]"
+                    data-category="[YOUR_CATEGORY_NAME]"
+                    data-category-id="[YOUR_CATEGORY_ID]"
+                    data-mapping="specific"
+                    data-term="guestbook"
+                    data-strict="0"
+                    data-reactions-enabled="1" 
+                    data-emit-metadata="0"
+                    data-input-position="top"
+                    data-theme="noborder_light"
+                    data-lang="en"
+                    data-sort="newest"
+                    crossorigin="anonymous"
+                    async>
+                </script>
+            </div>
+        </div>
+    </div>
+    <footer id="contact-footer" class="footer-section" data-footer></footer>
+</div>
+<script src="assets/js/site.js"></script>
+</body>
+</html>

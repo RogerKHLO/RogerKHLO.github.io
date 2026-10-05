@@ -1,0 +1,55 @@
+{
+ "repo": "RogerKHLO/RogerKHLO.github.io",
+ "contact": {
+  "instagram": "https://instagram.com/rkhl.ol",
+  "linkedin": "https://linkedin.com/in/rogerkhlo",
+  "email": "mailto:roger.rlkh@gmail.com",
+  "github": "https://github.com/rogerkhlo",
+  "phone": "tel:+601170017882"
+ },
+ "pdf": "assets/cv.pdf",
+ "en": {
+  "switchLabel": "英 ⇄ 中 ",
+  "vol": "Vol. 1 Issue 1", "price": "Price: One Click",
+  "statusTitle": "DAILY STATUS", "status": "WORKING", "forecast": "Forecast: <br>Debugging.",
+  "masthead": "The Daily Engineer",
+  "h1a": "Fast, Cheap, Correct... Choose two",
+  "byline": "BY F. D. C. Willard🐾🐈‍⬛️",
+  "body1": "<span class='drop-cap'>B</span>ad design with good presentation is doomed eventually. Good design with bad presentation is doomed immediately.",
+  "quote1": "\"Brevity is The Soul of Wit.\"",
+  "body2": "I’m still mastering the art of explaining hard topics simply. This portfolio is my practice ground.",
+  "h3a": "Popular Mechatronics", "h2a": "Featured Guest",
+  "fig1": "Fig 1. Hands-on Work",
+  "catalog": "<strong>Project Catalogue</strong><br> Eclectic Collections of Stuff I've done. <a href='projects.html' style='color: var(--ink-red);'>Details.</a>",
+  "h1b": "Editorial", "h2b": "Creative Works",
+  "body3": "I often venture out of my comfort zone for inspiration and clarity.",
+  "fig2": "Deep in Thought...",
+  "quote2": "\"Simplicity is the soul of efficiency.\"",
+  "dirs": "Directories",
+  "navProjects": "Project Catalogue", "navHobbies": "Creative Works", "navContact": "Contact Info.", "navAbout": "About Me",
+  "wanted": "WANTED", "wantedBody": "Something Weird, Something Fun", "reward": "REWARD", "rewardBody": "Undevoted Drive to Problem Solve",
+  "logLink": "Open Visitor Log ✎",
+  "copyright": "Mischief Managed. &copy; 2025 Anonynomnomnom.",
+  "toTop": "Return to Masthead ↑",
+  "catIntro": "The following records document based on self-reflections for projects I've done (at least the ones I had time to reflect upon). Handle with care.",
+  "openCase": "Open Case File ☞", "tools": "TOOLS:", "back": "← RETURN TO CATALOGUE", "specs": "Technical Specs"
+ },
+ "zh": {
+  "switchLabel": "The Daily Engineer ⟲",
+  "envelope": "寄發地：南洋 婆羅洲<br>收批人：福州 客家 列祖列宗<br>批銀：無（附數位宗卷一襲）<br>批語：見字如面，報個平安",
+  "letter": [
+   "<p class='salutation'>叩稟|列祖列宗 大人尊前：</p>",
+   "敬稟者：歲月不居，時節如流。遙想當年，|先祖隨大明寶船揚帆南渡，涉鯨波鼉浪，艤舟滿剌加。復輾轉印尼西加里曼丹以淘金，涉足馬來亞半島而採錫。披荊斬棘，櫛風沐雨，瀝血拓荒於瘴癘之境，方肇啟吾族南洋之基業。",
+   "不肖孫<span class='brush-name'>羅康宏</span>，承父系客家硬頸之風骨，蒙母族福州海納之遺澤。閩水泱泱，袛護遊子；原鄉迢遞，血脈相連。兩脈淵源，皆融於一身。",
+   "今特叩告|列祖列宗：孫兒現居婆羅洲，已然安居樂業。雖未承先人礦斧，然今以機電工程、數碼科技為業，運算毫釐，亦算匠心一脈之延續。終日與金石代碼為伴，衣食無憂，再無昔日|先輩下礦井、捫瘴氣之苦。",
+   "遙記昔年，|先輩撙節錙銖，託水客寄回之平安批，字字泣血，紙短情長。然竹帛易朽，婆羅洲之雨林亦將漫掩舊時礦坑。孫兒遂以當世之科技，構此「數位網頁」，引熒幕為素箋，化代碼作朱墨，即為新時代之平安批。縱然滄海桑田，斯網斯文，將令吾等福州與客家之血脈，永銘於賽博太虛，萬古長存。",
+   "尺素寸心，不盡依依。南洋明月，堪照故土。伏維|鑒察。肅此，敬請|冥安。",
+   "<p style='margin-right:2.5em;padding-top:4em'>不肖孫 <span class='brush-signature'>羅康宏</span> 泣叩</p>",
+   "<p style='margin-right:5em;font-weight:900;color:#b32d2e'>【附：數位宗卷目錄】</p>",
+   "<p><a href='info.html' class='archive-link'>一、履歷檔志 <span class='archive-sub'>(生平與足跡)</span></a></p>",
+   "<p><a href='projects.html' class='archive-link'>二、工程造物 <span class='archive-sub'>(機電與代碼)</span></a></p>",
+   "<p><a href='hobbies.html' class='archive-link'>三、藝文百工 <span class='archive-sub'>(光影與雅興)</span></a></p>",
+   "<p><a href='log.html' class='archive-link'>四、魚雁留印 <span class='archive-sub'>(過客之迴響)</span></a></p>"
+  ]
+ }
+}

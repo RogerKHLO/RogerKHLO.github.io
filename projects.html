@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Catalogue</title>
+    <link href="https://fonts.googleapis.com/css2?family=Pirata+One&family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Cormorant+Garamond:wght@400;500;600;700&family=Homemade+Apple&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<div class="paper">
+    <div class="head-wrapper">
+        <a href="index.html"><div class="back-link">← RETURN TO FRONT PAGE</div></a>
+        <header class="masthead" style="font-size:5rem">The Catalogue</header>
+        <div class="subhead"><span>Section B</span><span>Project Case Files</span><span>Declassified</span></div>
+    </div>
+    <div class="archive-container">
+        <div id="intro" class="catalog-intro"></div>
+        <div id="case-files-list"></div>
+    </div>
+    <footer class="footer-section" data-footer></footer>
+</div>
+<script src="assets/js/site.js"></script>
+<script>
+siteReady.then(async S => {
+  document.getElementById('intro').textContent = S.T.catIntro;
+  const list = document.getElementById('case-files-list');
+  (await S.listProjects()).forEach(({ id, meta: m }) => {
+    const href = `project.html?id=${id}`;
+    list.insertAdjacentHTML('beforeend', `
+    <div class="case-file"><div class="status-stamp">${m.status || ''}</div>
+      <div class="case-grid">
+        <div class="file-evidence"><a href="${href}" class="frame-link"><figure class="magic-frame">
+          <img src="${m.image}" class="media" alt="${m.title}"><figcaption>#${m.title}</figcaption></figure></a></div>
+        <div class="case-content">
+          <span class="file-meta">${m.id}${m.period ? ' · ' + m.period : ''}</span><h2 class="case-title">${m.title}</h2>
+          <div class="tech-stack"><strong>${S.T.tools}</strong> ${m.tech || ''}</div>
+          <p class="case-desc">${m.desc || ''}</p>
+          <a href="${href}" class="view-case-btn">${S.T.openCase}</a></div>
+      </div></div>`);
+  });
+});
+</script>
+</body>
+</html>

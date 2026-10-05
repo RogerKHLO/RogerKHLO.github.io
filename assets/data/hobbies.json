@@ -1,0 +1,73 @@
+{
+ "imageDir": "images/hobbies/",
+ "sections": [
+ {
+  "title": "Studio Photography",
+  "link": "https://www.instagram.com/p/CzjSvrRvnPx/?igsh=ZzU3dnlnbWdkcXI4",
+  "tagline": "Flash Control - Precise Flash, Play with Lighting & Shadows.",
+  "scroll": "left",
+  "images": [
+   ["s1.webp", "Brillig"],
+   ["s2.webp", "Slithy"],
+   ["s3.webp", "Tove"],
+   ["s4.webp", "Gyre"],
+   ["s5.webp", "Wabe"],
+   ["s6.jpg", "Mimsy"],
+   ["s7.jpg", "Borogove"]
+  ]
+ },
+ {
+  "title": "Stage Photography",
+  "link": "https://instagram.com/rkhl.ol",
+  "tagline": "Exposure Compensation - Balance Light & Dark, Preserve Subject Detail.",
+  "scroll": "right",
+  "images": [
+   ["st7.jpg", "Rath"],
+   ["st6.jpg", "Outgrabe"],
+   ["st5.jpg", "Jubjub"],
+   ["st4.jpg", "Frumious"],
+   ["st3.jpg", "Bandersnatch"],
+   ["st2.jpg", "Vorpal"],
+   ["st1.jpg", "Manxome"]
+  ]
+ },
+ {
+  "title": "Sport Photography",
+  "link": "https://www.instagram.com/p/Cx4KhcmP0Rk/?igsh=MXR3M2JkZGVibTV3Mg==",
+  "tagline": "Shutter Speed - Fast Shutter, Freeze Motion.",
+  "scroll": "left",
+  "images": [
+   ["sp1.webp", "Neque"],
+   ["sp2.webp", "porro"],
+   ["sp3.webp", "quisquam"],
+   ["sp4.webp", "est"],
+   ["sp5.webp", "qui"],
+   ["sp6.webp", "dolorem"],
+   ["sp7.webp", "ipsum"],
+   ["sp8.webp", "quia"]
+  ]
+ },
+ {
+  "title": "Event Photography",
+  "link": "https://www.instagram.com/p/C0Bsq5dv4kT/?igsh=dW56Z2VjMjE3dWZh",
+  "tagline": "Flexible ISO - Adapt to changing light with minimal noise.",
+  "scroll": "right",
+  "images": [
+   ["e8.jpg", "45 BC"],
+   ["e7.jpg", "- Cicero"],
+   ["e6.jpg", "velit"],
+   ["e5.jpg", "adipisci"],
+   ["e4.jpg", "consectetur"],
+   ["e3.jpg", "amet"],
+   ["e2.jpg", "sit"],
+   ["e1.jpg", "dolor"]
+  ]
+ },
+ {
+  "title": "Miscellanous: Video, Music, Arts, etc...",
+  "link": "https://instagram.com/rkhl.ol",
+  "tagline": "Videos, Drawings, Models ,and More. Follow Me on Socials",
+  "images": []
+ }
+ ]
+}

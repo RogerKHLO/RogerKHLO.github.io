@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Crafts</title>
+    <link href="https://fonts.googleapis.com/css2?family=Pirata+One&family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Cormorant+Garamond:wght@400;500;600;700&family=Homemade+Apple&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+<div class="paper">
+    <div class="head-wrapper">
+        <a href="index.html">
+            <div class="back-link">← RETURN TO FRONT PAGE</div>
+        </a>
+        <header class="masthead" style="font-size: 5rem;">The Crafts</header>
+        <div class="subhead">
+            <span>Section C</span>
+            <span>The Creative Dept.</span>
+            <span>Visual & Audio</span>
+        </div>
+    </div>
+
+    <div id="crafts"></div>
+
+    <footer class="footer-section" data-footer></footer>
+
+</div>
+<script src="assets/js/site.js"></script>
+<script>
+siteReady.then(async S => {
+  const d = await (await fetch(S.U('assets/data/hobbies.json'))).json();
+  const rot = [1, -2, 2, -1];
+  const card = (im, j, n) => `<div class="collage-item" style="transform: rotate(${rot[(j % n) % 4]}deg)"${j >= n ? ' aria-hidden="true"' : ''}>
+    <img src="${d.imageDir}${im[0]}" alt="${j >= n ? '' : im[1]}" loading="lazy"><div class="collage-caption">${im[1]}</div></div>`;
+  document.getElementById('crafts').innerHTML = d.sections.map((s, i) => {
+    const n = s.images.length, dir = s.scroll || (i % 2 ? 'right' : 'left');
+    const strip = n ? `<a href="${s.link}" target="_blank" rel="noopener" class="craft-link"><div class="collage-section">
+      <div class="scroll-track scroll-${dir}">${[...s.images, ...s.images].map((im, j) => card(im, j, n)).join('')}</div></div></a>` : '';
+    return `<section class="craft-section">
+      <div class="hl3 craft-title"><a href="${s.link}" target="_blank" rel="noopener" class="section-header-link">${s.title}</a></div>
+      <p class="craft-tagline">${s.tagline}</p>${strip}</section>`;
+  }).join('');
+});
+</script>
+</body>
+</html>
